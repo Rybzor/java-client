@@ -798,7 +798,10 @@ public class Connection implements ConnectionBase {
     private void reconnect() {
         if (mState == ConnectionState.Connected) {
             log("Stopping Heartbeat monitor", LogLevel.Verbose);
-            mHeartbeatMonitor.stop();
+			
+			if(mHeartbeatMonitor != null)
+				mHeartbeatMonitor.stop();
+			
             log("Restarting the transport", LogLevel.Information);
             startTransport(mHeartbeatMonitor.getKeepAliveData(), true);
         }
